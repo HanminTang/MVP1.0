@@ -148,6 +148,7 @@ const CAMPUS_IMAGES = {
   debate: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600',
   calligraphy: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600',
   movie: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600',
+  football: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600',
 }
 
 // 模拟活动数据（扬州大学校园活动）
@@ -179,25 +180,26 @@ export const mockActivities: Activity[] = [
   },
   {
     id: 'act_2',
-    title: '手工社·DIY干花香薰蜡烛工坊',
-    description: '用天然大豆蜡和干花，制作属于自己的香薰蜡烛。全程有社员指导，零基础也能做出超美的作品。包含所有材料费，做好可直接带走。适合闺蜜一起来～',
-    cover: CAMPUS_IMAGES.handmade,
-    images: [CAMPUS_IMAGES.handmade],
-    hostId: 'host_2',
+    title: '周五晚足球6v6·校内友谊赛',
+    description: '扬大足球爱好者集合！每周五晚在扬子津校区田径场组织6v6友谊赛，随机分组对抗。不限水平，新手老手都欢迎。自带球鞋，提供比赛用球和分队背心。踢完一起去北门撸串！',
+    cover: CAMPUS_IMAGES.football,
+    images: [CAMPUS_IMAGES.football],
+    hostId: 'host_3',
     coHostIds: [],
-    tags: ['手作', '文艺', '社团活动', '放松'],
+    tags: ['运动', '足球', '社交', '学生自发'],
     location: '扬州市',
-    locationDetail: '荷花池校区·学生活动中心302',
+    locationDetail: '扬子津校区田径场',
     startTime: futureDate(5),
     endTime: futureDate(5),
     status: 'published',
-    accessRules: { maxParticipants: 12, minAge: 18, genderLimit: 'all', joinMethod: 'auto' },
-    fee: { type: 'full', totalAmount: 25, depositAmount: 25, balanceAmount: 0 },
-    currentParticipants: 8,
-    participantIds: ['user_3', 'user_6'],
+    accessRules: { maxParticipants: 14, minAge: 18, genderLimit: 'all', joinMethod: 'auto' },
+    fee: { type: 'free', totalAmount: 0, depositAmount: 0, balanceAmount: 0 },
+    currentParticipants: 10,
+    participantIds: ['user_2', 'user_5', 'user_4'],
     pendingIds: [],
     questions: [
-      { id: 'q3', userId: 'user_3', question: '做好的蜡烛可以带回宿舍吗？', answer: '可以的～我们会提供包装盒，方便携带', isHighlighted: true, createdAt: pastDate(3) },
+      { id: 'q3', userId: 'user_2', question: '需要自己带球鞋吗？', answer: '是的～穿碎钉或AG就行，场地是人工草', isHighlighted: true, createdAt: pastDate(3) },
+      { id: 'q3b', userId: 'user_5', question: '女生可以参加吗？', answer: '当然！我们有不少女生一起踢，氛围很好', isHighlighted: true, createdAt: pastDate(2) },
     ],
     createdAt: pastDate(10),
   },
@@ -356,8 +358,8 @@ export const mockRegistrations: Registration[] = [
     paidAt: pastDate(5), authorizedAt: pastDate(5), createdAt: pastDate(6),
   },
   {
-    id: 'reg_4', activityId: 'act_2', userId: 'user_1', status: 'pending_payment',
-    paymentStatus: 'unpaid', depositAmount: 25, balanceAmount: 0,
+    id: 'reg_4', activityId: 'act_7', userId: 'user_1', status: 'pending_payment',
+    paymentStatus: 'unpaid', depositAmount: 35, balanceAmount: 0,
     createdAt: pastDate(1), paymentDeadline: futureDate(0),
   },
 ]
@@ -372,8 +374,8 @@ export const mockReviews: Review[] = [
   { id: 'rev_5', activityId: 'act_8', fromUserId: 'user_4', toUserId: 'host_1', rating: 4, tags: ['拍照好看', '组织好'], comment: '瘦西湖落日太美了，学长帮忙拍的照片也很好看！', createdAt: pastDate(12) },
   { id: 'rev_6', activityId: 'act_6', fromUserId: 'user_6', toUserId: 'host_1', rating: 5, tags: ['环保', '有创意', '氛围好'], comment: '超喜欢这种环保理念的活动！旧T恤改环保袋超实用。', createdAt: pastDate(3) },
   // host_2 苏雨桐 的评价
-  { id: 'rev_7', activityId: 'act_2', fromUserId: 'user_3', toUserId: 'host_2', rating: 5, tags: ['老师细心', '作品好看', '环境好'], comment: '蜡烛做得超好看！雨桐学姐一步步教，零基础也能做出很满意的作品。', createdAt: pastDate(15) },
-  { id: 'rev_8', activityId: 'act_2', fromUserId: 'user_6', toUserId: 'host_2', rating: 5, tags: ['手作体验棒', '性价比高'], comment: '干花蜡烛太美了，送舍友超合适！材料很充足。', createdAt: pastDate(14) },
+  { id: 'rev_7', activityId: 'act_2', fromUserId: 'user_2', toUserId: 'host_3', rating: 5, tags: ['氛围好', '组队快', '好玩'], comment: '6v6踢得很过瘾！分组很均匀，新手也能玩得开心，结束后撸串也很赞。', createdAt: pastDate(15) },
+  { id: 'rev_8', activityId: 'act_2', fromUserId: 'user_4', toUserId: 'host_3', rating: 4, tags: ['组织好', '社交'], comment: '虽然不太会踢但大家很包容，认识了几个经院的朋友～', createdAt: pastDate(14) },
   { id: 'rev_9', activityId: 'act_7', fromUserId: 'user_3', toUserId: 'host_2', rating: 4, tags: ['有趣', '耐心'], comment: '陶艺体验很治愈，虽然做得不太完美但过程很开心～', createdAt: pastDate(20) },
   { id: 'rev_10', activityId: 'act_7', fromUserId: 'user_6', toUserId: 'host_2', rating: 5, tags: ['放松', '有成就感'], comment: '第一次做陶艺，没想到效果还不错！期待两周后取成品。', createdAt: pastDate(19) },
   // host_3 王浩然 的评价
@@ -430,7 +432,7 @@ export const mockNotifications: Notification[] = [
   },
   {
     id: 'noti_2', userId: 'user_1', type: 'payment',
-    title: '待支付提醒', content: '你报名的「手工社·DIY干花香薰蜡烛」还未完成支付，15分钟内未支付将自动取消哦～',
+    title: '待支付提醒', content: '你报名的「陶艺体验·做一个属于自己的杯子」还未完成支付，15分钟内未支付将自动取消哦～',
     isRead: false, linkTo: '/activity/act_2', createdAt: pastDate(1),
   },
   {

@@ -60,13 +60,13 @@ export function Home() {
     <Layout>
       <div>
         {/* 搜索栏 */}
-        <div className="px-4 pt-5 pb-4">
-          <div className="relative flex items-center">
-            <div className="absolute left-4 flex items-center justify-center pointer-events-none">
+        <div className="px-4 pt-5 pb-5">
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 flex items-center pointer-events-none">
               <svg
-                className="text-gray-400"
-                width="20"
-                height="20"
+                className="text-gray-300"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -82,7 +82,7 @@ export function Home() {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="搜索你感兴趣的活动..."
-              className="w-full pl-12 pr-4 py-3.5 bg-white rounded-2xl text-[15px] text-gray-700 placeholder:text-gray-400 outline-none border border-gray-200 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-50 transition shadow-sm"
+              className="w-full pl-14 pr-5 py-4 bg-white rounded-2xl text-[16px] text-gray-700 placeholder:text-gray-400 placeholder:text-center outline-none border border-gray-200/80 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-50 transition shadow-sm"
             />
           </div>
         </div>
