@@ -235,7 +235,7 @@ export function ActivityDetail() {
 
         {/* ── Host info ───────────────────────────────────────────────────────── */}
         <div className="px-4 py-4">
-          <h2 className="text-sm font-bold text-gray-800 mb-3">主办方</h2>
+          <h2 className="text-[15px] font-bold text-gray-800 mb-3">主办方</h2>
           {host && (
             <div
               onClick={() => navigate(`/user/${host.id}`)}
@@ -247,23 +247,25 @@ export function ActivityDetail() {
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-gray-800">{host.nickname}</p>
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <p className="text-[15px] font-semibold text-gray-800">{host.nickname}</p>
+                  {host.realNameVerified && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-50 text-green-600 font-medium">实名</span>
+                  )}
+                  {host.studentVerified && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 font-medium">学生认证</span>
+                  )}
+                </div>
+                <p className="text-[12px] text-gray-400 mb-0.5">{host.major} · {host.grade}</p>
                 <div className="flex items-center gap-2 mt-0.5">
                   <div className="flex items-center gap-0.5">
-                    <span className="text-yellow-500 text-xs">★</span>
-                    <span className="text-xs text-gray-600 font-medium">
-                      {host.rating}
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      ({host.ratingCount})
-                    </span>
+                    <span className="text-yellow-500 text-[13px]">★</span>
+                    <span className="text-[13px] text-gray-600 font-medium">{host.rating}</span>
+                    <span className="text-[12px] text-gray-400">({host.ratingCount})</span>
                   </div>
-                  <span className="text-xs text-gray-300">|</span>
-                  <span className="text-xs text-gray-400">
-                    已举办 {host.hostedCount} 场
-                  </span>
+                  <span className="text-[12px] text-gray-300">|</span>
+                  <span className="text-[12px] text-gray-400">已举办 {host.hostedCount} 场</span>
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{host.bio}</p>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-300">
                 <path d="M9 18l6-6-6-6" />

@@ -14,6 +14,7 @@ export function Reviews() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<ReviewTab>('received')
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   const currentUser = useUserStore((s) => s.currentUser)
   const reviews = useWalletStore((s) => s.reviews)
@@ -58,22 +59,37 @@ export function Reviews() {
     const fromUser = getUserById(review.fromUserId)
     const isMine = review.fromUserId === currentUser.id
     const displayUser = isMine ? getUserById(review.toUserId) : fromUser
+    const isExpanded = expandedId === review.id
 
     return (
-      <div key={review.id} className="bg-white rounded-2xl p-4 shadow-sm">
+      <div
+        key={review.id}
+        onClick={() => setExpandedId(isExpanded ? null : review.id)}
+        className={`bg-white rounded-2xl p-4 shadow-sm active:bg-gray-50 cursor-pointer transition-all ${
+          isExpanded ? 'ring-1 ring-indigo-200' : ''
+        }`}
+      >
         {/* Header: user + stars */}
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center gap-2.5">
             <img
               src={displayUser?.avatar}
               alt={displayUser?.nickname}
-              className="w-9 h-9 rounded-full bg-gray-100"
+              className="w-10 h-10 rounded-full bg-gray-100"
+              onClick={(e) => { e.stopPropagation(); if (displayUser) navigate(`/user/${displayUser.id}`) }}
             />
             <div>
-              <p className="text-sm font-medium text-gray-800">
-                {displayUser?.nickname || '未知用户'}
+              <div className="flex items-center gap-1.5">
+                <p className="text-[14px] font-medium text-gray-800">
+                  {displayUser?.nickname || '未知用户'}
+                </p>
+                {displayUser?.studentVerified && (
+                  <span className="text-[10px] px-1 py-0.5 rounded bg-blue-50 text-blue-500">学生</span>
+                )}
+              </div>
+              <p className="text-[11px] text-gray-400">
+                {displayUser?.major} · {displayUser?.grade} · {timeAgo(review.createdAt)}
               </p>
-              <p className="text-[11px] text-gray-400">{timeAgo(review.createdAt)}</p>
             </div>
           </div>
           {renderStars(review.rating)}
@@ -83,10 +99,7 @@ export function Reviews() {
         {review.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-2">
             {review.tags.map((tag, i) => (
-              <span
-                key={i}
-                className="text-[11px] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 font-medium"
-              >
+              <span key={i} className="text-[11px] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 font-medium">
                 {tag}
               </span>
             ))}
@@ -94,23 +107,41 @@ export function Reviews() {
         )}
 
         {/* Comment */}
-        <p className="text-sm text-gray-700 leading-relaxed mb-3">{review.comment}</p>
+        <p className={`text-[13px] text-gray-700 leading-relaxed mb-3 ${isExpanded ? '' : 'line-clamp-2'}`}>
+          {review.comment}
+        </p>
 
-        {/* Footer: activity + date + delete */}
+        {/* Expanded detail */}
+        {isExpanded && (
+          <div className="mb-3 p-3 bg-gray-50 rounded-xl">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[11px] text-gray-400">来自活动：</span>
+              <button
+                onClick={(e) => { e.stopPropagation(); navigate(`/activity/${review.activityId}`) }}
+                className="text-[12px] text-indigo-500 font-medium"
+              >
+                {activity?.title || '查看活动'}
+              </button>
+            </div>
+            <p className="text-[11px] text-gray-400">{formatDate(review.createdAt, 'yyyy年MM月dd日 HH:mm')}</p>
+          </div>
+        )}
+
+        {/* Footer */}
         <div className="flex items-center justify-between">
           <button
-            onClick={() => navigate(`/activity/${review.activityId}`)}
-            className="text-xs text-indigo-500 truncate max-w-[60%]"
+            onClick={(e) => { e.stopPropagation(); navigate(`/activity/${review.activityId}`) }}
+            className="text-[12px] text-indigo-500 truncate max-w-[60%]"
           >
             {activity?.title || '查看活动'}
           </button>
           <div className="flex items-center gap-2">
             <span className="text-[11px] text-gray-400">
-              {formatDate(review.createdAt)}
+              {isExpanded ? '收起' : '点击展开'}
             </span>
             {isMine && (
               <button
-                onClick={() => setDeleteTarget(review.id)}
+                onClick={(e) => { e.stopPropagation(); setDeleteTarget(review.id) }}
                 className="text-[11px] text-red-400 active:text-red-600 transition-colors"
               >
                 删除
@@ -129,14 +160,14 @@ export function Reviews() {
         <div className="flex bg-white rounded-xl p-1 shadow-sm">
           {(
             [
-              { key: 'received' as const, label: '收到的评价' },
-              { key: 'sent' as const, label: '发出的评价' },
+              { key: 'received' as const, label: `收到的评价 (${receivedReviews.length})` },
+              { key: 'sent' as const, label: `发出的评价 (${sentReviews.length})` },
             ] as const
           ).map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex-1 py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
                 activeTab === tab.key
                   ? 'bg-indigo-500 text-white shadow-sm'
                   : 'text-gray-500 active:bg-gray-50'

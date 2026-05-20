@@ -88,6 +88,9 @@ export function ActivityCard({ activity, showStatus = false, compact = false }: 
               <>
                 <img src={host.avatar} alt="" className="w-5 h-5 rounded-full" />
                 <span className="text-[13px] text-gray-400">{host.nickname}</span>
+                {host.studentVerified && (
+                  <span className="text-[10px] px-1 py-0.5 rounded bg-blue-50 text-blue-500">学生认证</span>
+                )}
               </>
             )}
           </div>

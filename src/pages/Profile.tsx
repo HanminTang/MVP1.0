@@ -14,7 +14,6 @@ export function Profile() {
   const unreadCount = getUnreadCount()
   const isHost = currentUser.role === 'host'
 
-  // Calculate stats from user data
   const participatedCount = currentUser.joinedCount
   const hostedCount = currentUser.hostedCount
 
@@ -42,18 +41,28 @@ export function Profile() {
           />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="text-lg font-bold text-gray-800 truncate">
+              <h2 className="text-[17px] font-bold text-gray-800 truncate">
                 {currentUser.nickname}
               </h2>
-              <span
-                className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
-                  isHost ? 'bg-orange-50 text-orange-500' : 'bg-indigo-50 text-indigo-500'
-                }`}
-              >
+              <span className={`px-2 py-0.5 rounded-full text-[11px] font-medium ${
+                isHost ? 'bg-orange-50 text-orange-500' : 'bg-indigo-50 text-indigo-500'
+              }`}>
                 {isHost ? 'B端·主办方' : 'C端·参与者'}
               </span>
             </div>
-            <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+            {/* 专业年级 + 认证 */}
+            <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+              <span className="text-[13px] text-gray-500">{currentUser.major} · {currentUser.grade}</span>
+            </div>
+            <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+              {currentUser.realNameVerified && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-50 text-green-600 font-medium">✓ 实名认证</span>
+              )}
+              {currentUser.studentVerified && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 font-medium">🎓 学生认证</span>
+              )}
+            </div>
+            <p className="text-[13px] text-gray-500 leading-relaxed line-clamp-2">
               {currentUser.bio || '这个人很懒，什么都没写～'}
             </p>
           </div>
@@ -63,10 +72,7 @@ export function Profile() {
         {currentUser.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-3">
             {currentUser.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 rounded-lg text-xs bg-gray-50 text-gray-500"
-              >
+              <span key={tag} className="px-2.5 py-1 rounded-lg text-[12px] bg-gray-50 text-gray-500">
                 {tag}
               </span>
             ))}
@@ -76,18 +82,18 @@ export function Profile() {
         {/* 统计行 */}
         <div className="grid grid-cols-3 gap-0 mt-4 pt-4 border-t border-gray-100">
           <div className="flex flex-col items-center">
-            <span className="text-lg font-bold text-gray-800">{participatedCount}</span>
-            <span className="text-[10px] text-gray-400 mt-0.5">参与</span>
+            <span className="text-[17px] font-bold text-gray-800">{participatedCount}</span>
+            <span className="text-[11px] text-gray-400 mt-0.5">参与</span>
           </div>
           <div className="flex flex-col items-center border-x border-gray-100">
-            <span className="text-lg font-bold text-gray-800">{hostedCount}</span>
-            <span className="text-[10px] text-gray-400 mt-0.5">举办</span>
+            <span className="text-[17px] font-bold text-gray-800">{hostedCount}</span>
+            <span className="text-[11px] text-gray-400 mt-0.5">举办</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-lg font-bold text-gray-800">
+            <span className="text-[17px] font-bold text-gray-800">
               {currentUser.rating.toFixed(1)}
             </span>
-            <span className="text-[10px] text-gray-400 mt-0.5">评分</span>
+            <span className="text-[11px] text-gray-400 mt-0.5">评分</span>
           </div>
         </div>
       </div>
@@ -102,14 +108,8 @@ export function Profile() {
               className="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm active:bg-gray-50 transition-colors"
             >
               <span className="text-2xl">{item.icon}</span>
-              <span className="text-sm font-medium text-gray-700">{item.label}</span>
-              <svg
-                className="w-4 h-4 text-gray-300 ml-auto"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
+              <span className="text-[14px] font-medium text-gray-700">{item.label}</span>
+              <svg className="w-4 h-4 text-gray-300 ml-auto" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -126,19 +126,13 @@ export function Profile() {
             className="flex items-center gap-3 w-full bg-white rounded-xl p-4 shadow-sm active:bg-gray-50 transition-colors"
           >
             <span className="text-2xl">{item.icon}</span>
-            <span className="text-sm font-medium text-gray-700">{item.label}</span>
+            <span className="text-[14px] font-medium text-gray-700">{item.label}</span>
             {item.badge && item.badge > 0 && (
               <span className="ml-1 px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-medium min-w-[18px] text-center">
                 {item.badge > 99 ? '99+' : item.badge}
               </span>
             )}
-            <svg
-              className="w-4 h-4 text-gray-300 ml-auto"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4 text-gray-300 ml-auto" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -153,21 +147,16 @@ export function Profile() {
         >
           <div className="flex items-center gap-3">
             <span className="text-2xl">🔄</span>
-            <span className="text-sm font-medium text-gray-700">
+            <span className="text-[14px] font-medium text-gray-700">
               {isHost ? '切换为C端' : '切换为B端'}
             </span>
           </div>
-          {/* Toggle Switch */}
-          <div
-            className={`w-11 h-6 rounded-full p-0.5 transition-colors duration-200 ${
-              isHost ? 'bg-indigo-500' : 'bg-gray-200'
-            }`}
-          >
-            <div
-              className={`w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
-                isHost ? 'translate-x-5' : 'translate-x-0'
-              }`}
-            />
+          <div className={`w-11 h-6 rounded-full p-0.5 transition-colors duration-200 ${
+            isHost ? 'bg-indigo-500' : 'bg-gray-200'
+          }`}>
+            <div className={`w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
+              isHost ? 'translate-x-5' : 'translate-x-0'
+            }`} />
           </div>
         </button>
       </div>

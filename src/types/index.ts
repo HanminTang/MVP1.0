@@ -16,6 +16,11 @@ export interface User {
   rating: number
   ratingCount: number
   createdAt: string
+  // 扬大学生信息
+  grade: string // 年级，如"大三"
+  major: string // 专业，如"计算机科学与技术"
+  realNameVerified: boolean // 实名认证
+  studentVerified: boolean // 学生认证
 }
 
 // 活动费用类型
