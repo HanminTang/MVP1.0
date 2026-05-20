@@ -25,25 +25,24 @@ export function TabBar() {
   const tabs = isHost ? hostTabs : userTabs
   const currentPath = location.pathname
 
-  // 只在主要页面显示TabBar
   const hidePaths = ['/activity/', '/register/', '/order/', '/host/publish', '/host/activity/', '/user/', '/review/', '/messages', '/coupons', '/timeline/']
   if (hidePaths.some(p => currentPath.startsWith(p))) return null
 
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[375px] bg-white/95 backdrop-blur-lg border-t border-gray-100 z-40">
-      <div className="flex items-center justify-around py-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))]">
+      <div className="flex items-center justify-around py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {tabs.map((tab) => {
           const isActive = currentPath === tab.path
           return (
             <button
               key={tab.path}
               onClick={() => navigate(tab.path)}
-              className={`flex flex-col items-center py-1 px-3 min-w-[60px] transition-colors ${
+              className={`flex flex-col items-center py-1.5 px-4 min-w-[64px] transition-colors ${
                 isActive ? 'text-indigo-600' : 'text-gray-400'
               }`}
             >
-              <span className="text-xl leading-none mb-0.5">{tab.icon}</span>
-              <span className={`text-[10px] ${isActive ? 'font-semibold' : ''}`}>{tab.label}</span>
+              <span className="text-[22px] leading-none mb-1">{tab.icon}</span>
+              <span className={`text-[11px] ${isActive ? 'font-semibold' : ''}`}>{tab.label}</span>
             </button>
           )
         })}

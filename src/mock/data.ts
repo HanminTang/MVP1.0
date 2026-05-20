@@ -337,18 +337,34 @@ export const mockRegistrations: Registration[] = [
   },
 ]
 
-// 模拟评价数据
+// 模拟评价数据（丰富评价，覆盖所有主办方和用户）
 export const mockReviews: Review[] = [
-  {
-    id: 'rev_1', activityId: 'act_6', fromUserId: 'user_1', toUserId: 'host_1',
-    rating: 5, tags: ['组织有序', '氛围好', '有趣'], comment: '非常棒的活动！主办方很用心，现场氛围特别好，认识了很多有趣的朋友。',
-    createdAt: pastDate(4),
-  },
-  {
-    id: 'rev_2', activityId: 'act_6', fromUserId: 'user_3', toUserId: 'host_1',
-    rating: 5, tags: ['有趣', '值得参加'], comment: '旧物交换很有意义，手工改造也很有趣！',
-    createdAt: pastDate(4),
-  },
+  // === host_1 城市漫游家 的评价 ===
+  { id: 'rev_1', activityId: 'act_6', fromUserId: 'user_1', toUserId: 'host_1', rating: 5, tags: ['组织有序', '氛围好', '有趣'], comment: '非常棒的活动！主办方很用心，现场氛围特别好，认识了很多有趣的朋友。', createdAt: pastDate(4) },
+  { id: 'rev_2', activityId: 'act_6', fromUserId: 'user_3', toUserId: 'host_1', rating: 5, tags: ['有趣', '值得参加'], comment: '旧物交换很有意义，手工改造也很有趣！下次还想来。', createdAt: pastDate(4) },
+  { id: 'rev_3', activityId: 'act_4', fromUserId: 'user_5', toUserId: 'host_1', rating: 4, tags: ['氛围好', '有深度'], comment: '读书分享会很有意思，认识了几个志同道合的朋友，咖啡也不错～', createdAt: pastDate(8) },
+  { id: 'rev_4', activityId: 'act_8', fromUserId: 'user_2', toUserId: 'host_1', rating: 5, tags: ['专业', '耐心指导', '学到很多'], comment: '摄影老师讲解很详细，学到了好多构图技巧，照片效果超出预期！', createdAt: pastDate(12) },
+  { id: 'rev_5', activityId: 'act_8', fromUserId: 'user_4', toUserId: 'host_1', rating: 4, tags: ['拍照好看', '组织好'], comment: '外滩夜景太美了，老师帮忙拍的照片也很好看！就是人有点多。', createdAt: pastDate(12) },
+  { id: 'rev_6', activityId: 'act_6', fromUserId: 'user_6', toUserId: 'host_1', rating: 5, tags: ['环保', '有创意', '氛围好'], comment: '超喜欢这种环保理念的活动！旧T恤改环保袋超实用。', createdAt: pastDate(3) },
+  { id: 'rev_17', activityId: 'act_4', fromUserId: 'user_3', toUserId: 'host_1', rating: 5, tags: ['温暖', '放松'], comment: '在一个很舒服的书店里聊天，氛围特别好，推荐！', createdAt: pastDate(7) },
+
+  // === host_2 手作工坊Lily 的评价 ===
+  { id: 'rev_7', activityId: 'act_2', fromUserId: 'user_3', toUserId: 'host_2', rating: 5, tags: ['老师细心', '作品好看', '环境好'], comment: '蜡烛做得超好看！老师一步步教，零基础也能做出很满意的作品。', createdAt: pastDate(15) },
+  { id: 'rev_8', activityId: 'act_2', fromUserId: 'user_6', toUserId: 'host_2', rating: 5, tags: ['手作体验棒', '性价比高'], comment: '干花蜡烛太美了，送朋友超合适！材料很充足。', createdAt: pastDate(14) },
+  { id: 'rev_9', activityId: 'act_7', fromUserId: 'user_3', toUserId: 'host_2', rating: 4, tags: ['有趣', '耐心'], comment: '陶艺体验很治愈，虽然做得不太完美但过程很开心～', createdAt: pastDate(20) },
+  { id: 'rev_10', activityId: 'act_7', fromUserId: 'user_6', toUserId: 'host_2', rating: 5, tags: ['放松', '有成就感'], comment: '第一次做陶艺，没想到效果还不错！期待两周后取成品。', createdAt: pastDate(19) },
+  { id: 'rev_18', activityId: 'act_2', fromUserId: 'user_1', toUserId: 'host_2', rating: 4, tags: ['环境好', '教学细致'], comment: '工坊环境很好，老师教得也很细，做好直接带走很方便。', createdAt: pastDate(13) },
+  { id: 'rev_19', activityId: 'act_6', fromUserId: 'user_1', toUserId: 'host_2', rating: 5, tags: ['协办认真', '热心'], comment: '作为协办方也很用心，手工改造环节教得很好！', createdAt: pastDate(4) },
+
+  // === host_3 运动搭子老王 的评价 ===
+  { id: 'rev_11', activityId: 'act_5', fromUserId: 'user_1', toUserId: 'host_3', rating: 5, tags: ['新手友好', '氛围好', '有趣'], comment: '第一次玩飞盘，老王教得特别耐心，氛围超好，出了一身汗但很开心！', createdAt: pastDate(10) },
+  { id: 'rev_12', activityId: 'act_5', fromUserId: 'user_2', toUserId: 'host_3', rating: 5, tags: ['运动达人', '组织好', '会带动气氛'], comment: '老王带的飞盘局太好玩了！下次继续！', createdAt: pastDate(9) },
+  { id: 'rev_13', activityId: 'act_1', fromUserId: 'user_4', toUserId: 'host_3', rating: 4, tags: ['路线好', '有安全感'], comment: '夜骑路线很棒，经过了好多有特色的小巷，拍照也很出片。', createdAt: pastDate(25) },
+  { id: 'rev_14', activityId: 'act_1', fromUserId: 'user_5', toUserId: 'host_3', rating: 5, tags: ['装备齐全', '专业'], comment: '头盔骑行灯都准备好了，路线规划也很合理，推荐！', createdAt: pastDate(24) },
+  { id: 'rev_15', activityId: 'act_3', fromUserId: 'user_2', toUserId: 'host_3', rating: 5, tags: ['难忘体验', '日出很美'], comment: '虽然凌晨4点很困，但看到日出的那一刻觉得值了！早餐也很好吃。', createdAt: pastDate(18) },
+  { id: 'rev_16', activityId: 'act_3', fromUserId: 'user_5', toUserId: 'host_3', rating: 4, tags: ['户外体验好', '自然'], comment: '徒步强度适中，山顶风景很好，是一次不错的体验。', createdAt: pastDate(17) },
+  { id: 'rev_20', activityId: 'act_5', fromUserId: 'user_4', toUserId: 'host_3', rating: 5, tags: ['社交', '好玩'], comment: '认识了好多新朋友，飞盘真的很上瘾！', createdAt: pastDate(8) },
+  { id: 'rev_21', activityId: 'act_1', fromUserId: 'user_2', toUserId: 'host_3', rating: 5, tags: ['城市探索', '有趣'], comment: '骑行穿过老城区的感觉太棒了，发现了好多以前不知道的地方。', createdAt: pastDate(23) },
 ]
 
 // 模拟优惠券数据

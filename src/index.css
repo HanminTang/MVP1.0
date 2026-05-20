@@ -23,7 +23,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -39,7 +39,6 @@ body {
   max-width: 100vw;
 }
 
-/* 纯移动端容器：在375px设备上1:1还原，桌面端居中显示手机壳 */
 #root {
   min-height: 100vh;
   width: 100%;
@@ -50,7 +49,6 @@ body {
   overflow-x: hidden;
 }
 
-/* 桌面端：加手机壳阴影模拟，无任何响应式布局变化 */
 @media (min-width: 376px) {
   body {
     background: #e5e7eb;
@@ -62,27 +60,23 @@ body {
   }
 }
 
-/* 禁止所有桌面端多余样式 */
 @media (min-width: 768px) {
   #root {
     max-width: 375px;
   }
 }
 
-/* 隐藏滚动条 */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-/* 安全区适配 */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
-/* Toast 动画 */
 @keyframes toastIn {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -96,7 +90,6 @@ body {
 .toast-enter { animation: toastIn 0.3s ease-out; }
 .toast-exit { animation: toastOut 0.3s ease-in; }
 
-/* Modal 动画 */
 @keyframes modalIn {
   from { opacity: 0; transform: translateY(100%); }
   to { opacity: 1; transform: translateY(0); }
@@ -110,7 +103,6 @@ body {
 .modal-enter { animation: modalIn 0.3s ease-out; }
 .modal-exit { animation: modalOut 0.2s ease-in; }
 
-/* Fade 动画 */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
